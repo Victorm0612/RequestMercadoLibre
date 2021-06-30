@@ -153,6 +153,9 @@ function paintTable(array){
   method: 'GET'
   })
   .then(response => {
-    setInterval(function(){ buscar() }, 60000);
+    setInterval(function(){ 
+      buscar() 
+      paintTable()
+    }, 60000);
   })
 }
