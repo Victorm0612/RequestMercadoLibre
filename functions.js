@@ -60,7 +60,7 @@ document.querySelector(".sendCode").addEventListener("click", async (e) => {
 
 async function buscar() {
   q = document.getElementById("busqueda").value || '1650';
-  await fetch(
+  fetch(
     `https://api.mercadolibre.com/sites/MCO/search?q=${q}&sort=price_asc`,
     {
       headers: {
@@ -85,7 +85,7 @@ document.querySelector(".sendQ").addEventListener("click", (e) => {
 });
 
 async function best_seller(seller_id, element) {
-  await fetch(`https://api.mercadolibre.com/users/${seller_id}`, {
+  fetch(`https://api.mercadolibre.com/users/${seller_id}`, {
     headers: {
       Authorization: `Bearer $${user.access_token}`,
     },
