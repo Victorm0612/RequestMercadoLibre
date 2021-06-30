@@ -143,19 +143,24 @@ function paintTable(array){
     total +=parseInt(element.price);
   }
   total = Math.floor(total/array.length);
-  setInterval(function(){
+  sendInfo();
+  setInterval(function(){ 
     buscar()
-    fetch(`https://api.thingspeak.com/update?api_key=7GJS9PZ8CQVG3DMT&field2=${list[0].price}`,{
-      method: 'GET'
-    })
-    .then(response => {
-      return response.json();
-    })
-    fetch(`https://api.thingspeak.com/update?api_key=7GJS9PZ8CQVG3DMT&field1=${total}`,{
+    sendInfo()
+  }, 60000);
+}
+
+function sendInfo(){
+  fetch(`https://api.thingspeak.com/update?api_key=7GJS9PZ8CQVG3DMT&field2=${list[0].price}`,{
     method: 'GET'
-    })
-    .then(response => {
-      return response.json();
-    })
-  }, 60000)
+  })
+  .then(response => {
+    return response.json();
+  })
+  fetch(`https://api.thingspeak.com/update?api_key=7GJS9PZ8CQVG3DMT&field1=${total}`,{
+  method: 'GET'
+  })
+  .then(res=>{
+    return res;
+  })
 }
