@@ -58,9 +58,8 @@ document.querySelector(".sendCode").addEventListener("click", async (e) => {
       });
   });
 
-document.querySelector(".sendQ").addEventListener("click", async (e) => {
-  e.preventDefault();
-  q = document.getElementById("busqueda").value;
+async function buscar() {
+  q = document.getElementById("busqueda").value || '1650';
   await fetch(
     `https://api.mercadolibre.com/sites/MCO/search?q=${q}&sort=price_asc`,
     {
@@ -78,6 +77,11 @@ document.querySelector(".sendQ").addEventListener("click", async (e) => {
       });
       document.querySelector('.buttonTable').className = 'buttonTable visible text-center'
     });
+}
+
+document.querySelector(".sendQ").addEventListener("click", (e) => {
+  e.preventDefault();
+  buscar();
 });
 
 async function best_seller(seller_id, element) {
@@ -142,5 +146,7 @@ function paintTable(array){
   fetch(`https://api.thingspeak.com/update?api_key=7GJS9PZ8CQVG3DMT&field1=${total}`,{
   method: 'GET'
   })
-  .then(response => {return response})
+  .then(response => {
+    setInterval(function(){ buscar() }, 60000);
+  })
 }
